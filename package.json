@@ -1,0 +1,14 @@
+{
+  "name": "oro-api",
+  "version": "1.0.0",
+  "description": "APIs for ORO Jewellers",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "API"
+  ],
+  "author": "Dev Team ORO Jewellers",
+  "license": "ISC"
+}
