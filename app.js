@@ -17,7 +17,7 @@ app.use('/api/users', users);
 
 
 mongoose
-    .connect("mongodb://localhost/orodb", { useNewUrlParser: true, useUnifiedTopology: true })
+    .connect("mongodb+srv://test:admin@cluster0-ht0et.mongodb.net/orodb?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log("Connected to Db successfully ... "))
     .catch(err => console.log("Ërror has occured while connecting to db : ", err));
 
