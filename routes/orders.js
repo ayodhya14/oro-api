@@ -4,7 +4,7 @@ const router = express.Router();
 
 
 //POST Method - Add an Order
-router.post('api/orders', async (req, res) => {
+router.post('/api/orders', async (req, res) => {
  
      //Validation
     // if(!req.body.name && !req.body.description && !req.body.availableQty){

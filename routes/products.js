@@ -3,7 +3,7 @@ const Product = require('../models/product');
 const router = express.Router();
 
 //POST Method - Add a Product
-router.post('api/products', async (req, res) => {
+router.post('/api/products', async (req, res) => {
  
    //Validation
    if(!req.body.name && !req.body.description && !req.body.availableQty){

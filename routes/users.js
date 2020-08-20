@@ -3,8 +3,10 @@ const User = require('../models/user');
 const router = express.Router();
 
 //POST Method - Register an User
-router.post('api/users', async (req, res) => {
+router.post('/api/users', async (req, res) => {
  
+    console.log("request");
+    console.log(req);
     //Validation
     if(!req.body.firstName && !req.body.lastName && !req.body.address && !req.body.email && !req.body.gender && !req.body.mobile){
         return res.status(400).send("Not all mandotry values have been set!");
