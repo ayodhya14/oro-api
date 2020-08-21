@@ -22,6 +22,13 @@ const productSchema = new mongoose.Schema({
     availableQty: {
         type: Number,
         required: true
+    },
+    imageUrl :{
+        type: String
+    },
+    productType :{
+        type: String,
+        required: true
     }
 });
 

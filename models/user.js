@@ -31,7 +31,10 @@ const userSchema = new mongoose.Schema({
         type: Number,
         default : "+9470000000 ",
         required: true
-    }
+    },
+    password: {type: String,
+        required: true        
+    },
 });
 
 const User = mongoose.model("User", userSchema);
