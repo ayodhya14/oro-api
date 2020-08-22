@@ -1,16 +1,13 @@
 const mongoose = require('mongoose');
 
 const orderSchema = new mongoose.Schema({
-    id: {
-        type: Number,
-        required: true
-    },
+
     userId :  {
-        type: Number,
+        type: String,
         required: true
     },
     productId :  {
-        type: [Number],
+        type: [String],
         required: true
     },
     qty: {
@@ -18,7 +15,7 @@ const orderSchema = new mongoose.Schema({
         required: true
     },
     subTotal: {
-        type: Number,
+        type: String,
         required: true
     },
     date: {
