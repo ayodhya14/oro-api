@@ -21,10 +21,12 @@ const userSchema = new mongoose.Schema({
         type: [String],
         required: true
     },
-    email: {type: String,
-            required: true        
+    email: {
+        type: String,
+        required: true        
     },
-    gender: {type: String,
+    gender: {
+        type: String,
         required: true        
     },
     mobile: {
@@ -32,7 +34,8 @@ const userSchema = new mongoose.Schema({
         default : "+9470000000 ",
         required: true
     },
-    password: {type: String,
+    password: {
+        type: String,
         required: true        
     },
 });
