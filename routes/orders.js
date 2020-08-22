@@ -2,6 +2,11 @@ const express = require('express');
 const Order = require('../models/order');
 const router = express.Router();
 
+router.get('/', async (req, res) => {
+    let allOrders = await Order.find();
+    res.send(allOrders);
+});
+
 
 //POST Method - Add an Order
 router.post('/api/orders', async (req, res) => {

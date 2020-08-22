@@ -2,6 +2,11 @@ const express = require('express');
 const Product = require('../models/product');
 const router = express.Router();
 
+router.get('/', async (req, res) => {
+     let allProducts = await Product.find();
+     res.send(allProducts);
+ });
+
 //POST Method - Add a Product
 router.post('/api/products', async (req, res) => {
  
