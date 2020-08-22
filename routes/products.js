@@ -19,7 +19,6 @@ router.post('/', async (req, res) => {
    
    try{
         let newProduct =  new Product ({
-            id: req.body.id,
             name: req.body.name,
             description: req.body.description,
             availableQty: req.body.availableQty,
