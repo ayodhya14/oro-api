@@ -16,7 +16,6 @@ app.use('/api/products', products);
 app.use('/api/orders', orders);
 app.use('/api/users', users);
 
-
 mongoose
     .connect("mongodb+srv://test:admin@cluster0-ht0et.mongodb.net/orodb?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log("Connected to Db successfully ... "))
