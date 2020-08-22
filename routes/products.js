@@ -22,11 +22,8 @@ router.post('/', async (req, res) => {
             name: req.body.name,
             description: req.body.description,
             availableQty: req.body.availableQty,
-            productType: req.body.productType
-            // address: req.body.address,
-            // type: req.body.type,
-            // availableQty: req.body.availableQty,
-            // imageUrl: req.body.imageUrl
+            productType: req.body.productType,
+            imageUrl: req.body.imageUrl
         });
         
         newProduct = await newProduct.save();

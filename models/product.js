@@ -22,6 +22,7 @@ const productSchema = new mongoose.Schema({
     },
     productType :{
         type: String,
+        enum: ["Necklace", "Earring", "Bangle", "Bracelet","Pendent"],
         required: true
     }
 });
