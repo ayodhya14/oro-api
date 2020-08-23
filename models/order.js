@@ -11,7 +11,7 @@ const orderSchema = new mongoose.Schema({
         required: true
     },
     qty: {
-        type: "Number",
+        type: Number,
         required: true
     },
     subTotal: {
