@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
  
    //Validation
-   if(!req.body.name && !req.body.description && !req.body.availableQty){
+   if(!req.body.name && !req.body.description && !req.body.availableQty && !req.body.unitPrice){
         return res.status(400).send("Not all mandotry values have been set!");
    }
    
@@ -22,9 +22,9 @@ router.post('/', async (req, res) => {
             name: req.body.name,
             description: req.body.description,
             availableQty: req.body.availableQty,
+            unitPrice: req.body.unitPrice,
             productType: req.body.productType,
             imageUrl: req.body.imageUrl,
-            password:req.body.password
         });
         
         newProduct = await newProduct.save();

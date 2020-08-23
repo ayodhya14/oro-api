@@ -19,10 +19,11 @@ router.post('/', async (req, res) => {
 
     try{
         let newOrder =  new Order ({
-            id: req.body.id,
+            // id: req.body.id,
             userId: req.body.userId,
             productId: req.body.productId,
             qty: req.body.qty,
+            unitPrice: req.body.unitPrice,
             subTotal: req.body.subTotal,
             date: req.body.date
           
