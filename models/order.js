@@ -1,10 +1,6 @@
 const mongoose = require('mongoose');
 
 const orderSchema = new mongoose.Schema({
-    id: {
-        type: Number,
-        required: true
-    },
     userId :  {
         type: Number,
         required: true

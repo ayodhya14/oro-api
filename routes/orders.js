@@ -8,6 +8,15 @@ router.get('/', async (req, res) => {
     res.send(allOrders);
 });
 
+//GET METHOD TO GET ORDER BY ID
+router.get('/:orderId', async (req, res) => {
+    let order = await Order.findById(req.params.orderId);
+
+    if (!order) {
+        return res.sendStatus(404).send("Order for the given Id does not exist");
+    }
+    res.send(order);
+});
 
 //POST Method - Add an Order
 router.post('/', async (req, res) => {
@@ -19,7 +28,6 @@ router.post('/', async (req, res) => {
 
     try{
         let newOrder =  new Order ({
-            id: req.body.id,
             userId: req.body.userId,
             productId: req.body.productId,
             qty: req.body.qty,
