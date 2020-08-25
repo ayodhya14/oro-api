@@ -14,23 +14,24 @@ router.get('/:userId', async (req, res) => {
 });
 
 //POST Method - Register an User
-router.post('/api/users', async (req, res) => {
+router.post('/', async (req, res) => {
  
     console.log("request");
     console.log(req);
     //Validation
-    if(!req.body.firstName && !req.body.lastName && !req.body.address && !req.body.email && !req.body.gender && !req.body.mobile){
+    if(!req.body.firstName && !req.body.lastName && !req.body.address && !req.body.email && !req.body.gender && !req.body.mobile && !req.body.password){
         return res.status(400).send("Not all mandotry values have been set!");
     }
     
     try{
         let newUser =  new User ({
-            firstName: req.body.firstName
-            // lastName: req.body.lastName,
-            // address: req.body.address,
-            // email: req.body.email,
-            // gender: req.body.gender,
-            // mobile: req.body.mobile
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            address: req.body.address,
+            email: req.body.email,
+            gender: req.body.gender,
+            mobile: req.body.mobile,
+            password: req.body.password
         });
         newUser =  await newUser.save();
         res.send(newUser);
