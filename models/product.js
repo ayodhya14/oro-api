@@ -24,7 +24,8 @@ const productSchema = new mongoose.Schema({
     },
     imageUrl :{
         type: String
-    },
+    }
+    ,
     productType :{
         type: String,
         enum: ["Necklace", "Earring", "Bangle", "Bracelet","Pendent"],
