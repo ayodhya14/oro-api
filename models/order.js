@@ -7,11 +7,11 @@ const orderSchema = new mongoose.Schema({
         required: true
     },
     productId :  {
-        type: String,
+        type: [String],
         required: true
     },
     qty: {
-        type: Number,
+        type: [Number],
         required: true
     },
     subTotal: {

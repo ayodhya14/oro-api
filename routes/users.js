@@ -2,6 +2,12 @@ const express = require('express');
 const User = require('../models/user');
 const router = express.Router();
 
+// GET METHOD TO GET ALL PRODUCTS
+router.get('/', async (req, res) => {
+    let allUsers = await User.find();
+    res.send(allUsers);
+});
+
 //GET WITH PARAMS- Get User Profile 
 router.get('/:userId', async (req, res) => {
     let user = await User.findById(req.params.userId);
@@ -63,15 +69,6 @@ router.put('/:userId', async (req, res) => {
         return res.status(500).send(e.message);
     }
     
-});
-
-router.put('/:heroId', async (req, res) => {
-    let hero = await Hero.findOneAndUpdate(
-        { _id: req.params.heroId },
-        { $set: { likeCount: req.body.likeCount } },
-        { new: true, useFindAndModify: false }
-    );
-    res.send(hero);
 });
 
 

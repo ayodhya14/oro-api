@@ -19,11 +19,9 @@ router.post('/', async (req, res) => {
 
     try{
         let newOrder =  new Order ({
-            // id: req.body.id,
             userId: req.body.userId,
             productId: req.body.productId,
             qty: req.body.qty,
-            unitPrice: req.body.unitPrice,
             subTotal: req.body.subTotal,
             date: req.body.date
           
@@ -33,6 +31,29 @@ router.post('/', async (req, res) => {
 
     }catch(e){
 
+        return res.status(500).send(e.message);
+    }
+    
+});
+
+//PUT Method - Update Order Profile
+router.put('/:orderid', async (req, res) => {
+ 
+    
+    try{
+        let order = await User.findOneAndUpdate(
+            { _id: req.params.orderId },
+            { $set: { 
+                productId: req.body.productId,
+                qty: req.body.qty,
+                subTotal: req.body.subTotal,
+                date: req.body.date } },
+            { new: true, useFindAndModify: false }
+        );
+        order = await order.save();
+        res.send(order);
+    
+    }catch(e){
         return res.status(500).send(e.message);
     }
     
