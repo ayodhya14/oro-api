@@ -8,11 +8,11 @@ router.get('/', async (req, res) => {
      res.send(allProducts);
  });
 
-// GET METHOD TO GET PRODUCTS BY NAME
-router.get("/name/:name", async (req, res) => {
-  let Products = await Product.find({ name: req.params.name }).then(
+// GET METHOD TO GET PRODUCTS BY PRODUCT TYPE
+router.get("/name/:productType", async (req, res) => {
+  let Products = await Product.find({ productType: new RegExp('^'+req.params.productType +'$', "i")}).then(
     () => {
-      return Product.find({ name: req.params.name });
+      return Product.find({ productType: new RegExp('^'+req.params.productType +'$', "i") });
     }
   );
   res.send(Products);
