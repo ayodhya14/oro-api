@@ -3,6 +3,8 @@ const Product = require("../models/product");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 
+// const auth = require('../middleware/authToken');
+
 const SECRET_KEY = "123456789";
 
 // GET METHOD TO GET ALL PRODUCTS

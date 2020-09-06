@@ -4,6 +4,8 @@ const User = require('../models/user');
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+// const auth = require('../middleware/authToken');
+
 const SECRET_KEY = "123456789";
 
 //User login
@@ -36,7 +38,9 @@ router.post("/", async (req, res) => {
         if (!validpassword) return res.status(400).send("Invalid Email or Password!");
 
         //create jwt token using user id and email
-        let token = jwt.sign({id: user._id, email: user.email}, SECRET_KEY);
+        let token = jwt.sign({id: user._id, email: user.email}, SECRET_KEY, {
+          //    expiresIn: "24h"
+        });
         res.send({token: token});
 
         //as a response - send a token
@@ -45,7 +49,6 @@ router.post("/", async (req, res) => {
      }catch (e){
           res.status(500).send(e.message);
      }   
-
-    
+ 
 });
 module.exports = router;

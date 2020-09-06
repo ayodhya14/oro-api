@@ -1,6 +1,9 @@
 const express = require("express");
 const Order = require("../models/order");
 const router = express.Router();
+const jwt = require("jsonwebtoken");
+
+const SECRET_KEY = "123456789";
 
 // GET METHOD TO GET ALL ORDERS
 router.get("/", async (req, res) => {
@@ -10,6 +13,17 @@ router.get("/", async (req, res) => {
 
 //POST Method - Add an Order
 router.post("/", async (req, res) => {
+
+ //Allow to users send token (x- any kind of a header that an user requesting a token to send)
+  const token = req.header("x-jwt-token");
+  if (!token) return res.status(401).send("Access denied.No token!")
+
+  try{
+    jwt.verify(token, SECRET_KEY);
+  }catch(e){
+    res.status(400).send("Invalid Token!");
+  }
+
   //  Validation
   if (
     !req.body.userId &&
