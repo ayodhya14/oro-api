@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     address: {
-        type: [String],
+        type: String,
         required: true
     },
     email: {
@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema({
     },
     mobile: {
         type: Number,
-        default : "+9470000000 ",
+        // default : "+9470000000 ",
         required: true
     },
     password: {
@@ -36,6 +36,16 @@ const userSchema = new mongoose.Schema({
         required: true        
     },
 });
+
+// // bcrypt password
+// userSchema.methods.generateHash = function(password){
+//     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+// }
+
+// //compare password
+// userSchema.methods.validPassword = function(password){
+//     return bcrypt.compareSync(password, this.password);
+// }
 
 const User = mongoose.model("User", userSchema);
 module.exports = User;

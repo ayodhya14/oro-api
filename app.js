@@ -3,20 +3,23 @@ const mongoose = require('mongoose');
 const products = require('./routes/products');
 const orders = require('./routes/orders');
 const users = require('./routes/users');
-// const users = require('./routes/usersLogin');
+const auth = require('./routes/auth');
+// const authenticator = require(".middlewares/authenticator");
 const cors = require('cors');
 const requestTime = require('./middlewares/requestTime');
 const app = express();
 const PORT = 5000;
+
 app.use(cors());
 app.use(express.json());
 app.use(requestTime);
+// app.use(authenticator);
 
-
+app.use('/api/auth', auth);
 app.use('/api/products', products);
 app.use('/api/orders', orders);
 app.use('/api/users', users);
-// app.use('/api/usersLogin', usersLogin);
+
 
 mongoose
     .connect("mongodb+srv://test:admin@cluster0-ht0et.mongodb.net/orodb?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true })

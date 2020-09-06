@@ -29,6 +29,7 @@ router.post("/", async (req, res) => {
       products: req.body.products,
       totQty: req.body.totQty,
       subTotal: req.body.subTotal,
+      total:req.body.total,
       date: req.body.date,
     });
     newOrder = await newOrder.save();
@@ -45,6 +46,7 @@ if (
         !req.body.products &&
         !req.body.totQty &&
         !req.body.subTotal &&
+        !req.body.total &&
         !req.body.date
       ) {
         return res.status(400).send("Set all mandatory fields to update the record!");
@@ -57,6 +59,7 @@ if (
           products: req.body.products,
           totQty: req.body.qty,
           subTotal: req.body.subTotal,
+          total: req.body.total,
           date: req.body.date,
         },
       },
