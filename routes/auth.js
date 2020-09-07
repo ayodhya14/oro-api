@@ -44,7 +44,15 @@ router.post("/", async (req, res) => {
           //    expiresIn: "24h"
         });
        
-        res.send({token: token, user});
+        res.send({
+              token: token,
+              firstName: user.firstName,
+              lastName: user.lastName,
+              gender: user.gender,
+              email: user.email,
+              address: user.address,
+              mobile: user.mobile
+           });
 
      }catch (e){
           res.status(500).send(e.message);
