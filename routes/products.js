@@ -16,12 +16,29 @@ router.get('/', async (req, res) => {
 
 // GET METHOD TO GET PRODUCTS BY PRODUCT TYPE
 router.get("/name/:productType", async (req, res) => {
-  let Products = await Product.find({ productType: new RegExp('^'+req.params.productType +'$', "i")}).then(
-    () => {
-      return Product.find({ productType: new RegExp('^'+req.params.productType +'$', "i") });
-    }
-  );
-  res.send(Products);
+
+  let products = await Product.find();
+  products = products.filter(product => {
+    return product.productType.toLowerCase().includes(req.params.productType.toLowerCase())
+})
+    .map(product => {
+        return {
+            _id: product._id,
+            productType: product.productType,
+            imageUrl: product.imageUrl,
+            description: product.description,
+            availableQty: product.availableQty,
+            unitPrice: product.unitPrice,
+            name: product.name,
+        };
+    });
+  // let Products = await Product.find({ productType: new RegExp('^'+req.params.productType +'$', "i")}).then(
+  //   () => {
+  //     return Product.find({ productType: new RegExp('^'+req.params.productType +'$', "i") });
+  //   }
+  // );
+  // console.log(products);
+  res.send(products);
 });
 
 // GET METHOD TO GET PRODUCTS BY ID
