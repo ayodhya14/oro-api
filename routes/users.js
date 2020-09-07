@@ -3,6 +3,10 @@ const User = require('../models/user');
 const UserSession = require('../models/UserSession');
 const bcrypt = require("bcrypt");
 const router = express.Router();
+// const jwt = require("jsonwebtoken");
+
+//created secret key from online tool
+const SECRET_KEY = "Y4w8atbcZFRfsWdMNvBea5TeqrUHtWLaVQURv25T1bU=";
 
 // GET METHOD TO GET ALL PRODUCTS
 router.get('/', async (req, res) => {
@@ -24,6 +28,16 @@ router.get('/:userId', async (req, res) => {
 
 //POST Method - Register an User
 router.post('/', async (req, res) => {
+
+// //Allow to users send token (x- any kind of a header that an user requesting a token to send)
+//   const token = req.header("x-jwt-token");
+//   if (!token) return res.status(401).send("Access denied.No token!")
+
+//   try{
+//     jwt.verify(token, SECRET_KEY);
+//   }catch(e){
+//     res.status(400).send("Invalid Token!");
+//   }
 
       // Validations - All Feilds are empty
       if(!req.body.firstName &&
@@ -56,7 +70,7 @@ router.post('/', async (req, res) => {
      if(!req.body.mobile){
           return res.status(400).send("Mobile cannot be blank!");
       } 
-      else if(!req.body.mobile.includes("+94")){
+      else if(!req.body.mobile.includes("+94") && (!req.body.mobile.length !== 12)){
         return res.status(400).send("Invalid Mobile number!");
       } 
     
@@ -97,7 +111,7 @@ router.post('/', async (req, res) => {
             // newUser.password = Buffer.from(newUser.password).toString('base64');
             
             //Password Encrypt using bcrypt
-            let salt =await bcrypt.genSalt(10);
+            let salt = await bcrypt.genSalt(10);
             let hashpassword = await bcrypt.hash(req.body.password,salt)
             
             let newUser =  new User ({
@@ -118,40 +132,40 @@ router.post('/', async (req, res) => {
         }
     }
     
-    app.post('/api/userLogin', (req, res) => {
-        const{ body} = req;
-        const{
-            password
-        } = body;
-        let {
-            email
-        } = body;
+    // app.post('/api/userLogin', (req, res) => {
+    //     const{ body} = req;
+    //     const{
+    //         password
+    //     } = body;
+    //     let {
+    //         email
+    //     } = body;
 
-         //validation for Email
-        if(!req.body.email){
-            return res.status(400).send("Email cannot be blank!");
-        } 
-        else if (!req.body.email.includes("@" && ".com")){
-            return res.status(400).send("Invalid Email Address!");
-        } 
+    //      //validation for Email
+    //     if(!req.body.email){
+    //         return res.status(400).send("Email cannot be blank!");
+    //     } 
+    //     else if (!req.body.email.includes("@" && ".com")){
+    //         return res.status(400).send("Invalid Email Address!");
+    //     } 
 
-        //validation for Password
-        if(!req.body.password){
-            return res.status(400).send("Password cannot be blank!");
-        } 
+    //     //validation for Password
+    //     if(!req.body.password){
+    //         return res.status(400).send("Password cannot be blank!");
+    //     } 
 
-        email = email.toLowerCase();
+    //     email = email.toLowerCase();
 
-        user.find({
-            email: email
-        }, (err,users) => {
-            if(err) {
-                return res.status(400).send("Server error!");
-            }
-            if (users.length != 1){
-                return res.status(400).send("Invalid!");
-            }
-        })
+    //     user.find({
+    //         email: email
+    //     }, (err,users) => {
+    //         if(err) {
+    //             return res.status(400).send("Server error!");
+    //         }
+    //         if (users.length != 1){
+    //             return res.status(400).send("Invalid!");
+    //         }
+    //     })
 
         // //If correct user
         // const user = users[0];
@@ -170,8 +184,8 @@ router.post('/', async (req, res) => {
         //         return res.status(200).send("Valid sign in!"),
         //         token: doc._id
         //     });
-        // });
-    });
+    //     // });
+    // });
 
 });
 

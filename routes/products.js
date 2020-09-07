@@ -5,7 +5,8 @@ const jwt = require("jsonwebtoken");
 
 // const auth = require('../middleware/authToken');
 
-const SECRET_KEY = "123456789";
+//created secret key from online tool
+const SECRET_KEY = "Y4w8atbcZFRfsWdMNvBea5TeqrUHtWLaVQURv25T1bU=";
 
 // GET METHOD TO GET ALL PRODUCTS
 router.get('/', async (req, res) => {

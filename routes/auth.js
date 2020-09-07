@@ -6,7 +6,9 @@ const jwt = require("jsonwebtoken");
 
 // const auth = require('../middleware/authToken');
 
-const SECRET_KEY = "123456789";
+//created secret key from online tool
+const SECRET_KEY = "Y4w8atbcZFRfsWdMNvBea5TeqrUHtWLaVQURv25T1bU=";
+
 
 //User login
 router.post("/", async (req, res) => {
@@ -35,20 +37,18 @@ router.post("/", async (req, res) => {
 
         //compare the encrypted password
         let validpassword =await bcrypt.compare(req.body.password, user.password);
-        if (!validpassword) return res.status(400).send("Invalid Email or Password!");
+        if (!validpassword) return res.status(400).send("Invalid Email or Password!");  
 
         //create jwt token using user id and email
         let token = jwt.sign({id: user._id, email: user.email}, SECRET_KEY, {
           //    expiresIn: "24h"
         });
-        res.send({token: token});
-
-        //as a response - send a token
-        res.send("Nice. I will send you back a JWT");
+       
+        res.send({token: token, user});
 
      }catch (e){
           res.status(500).send(e.message);
      }   
- 
+     
 });
 module.exports = router;
