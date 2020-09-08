@@ -9,7 +9,6 @@ const jwt = require("jsonwebtoken");
 //created secret key from online tool
 const SECRET_KEY = "Y4w8atbcZFRfsWdMNvBea5TeqrUHtWLaVQURv25T1bU=";
 
-
 //User login
 router.post("/", async (req, res) => {
 
@@ -60,4 +59,5 @@ router.post("/", async (req, res) => {
      }   
      
 });
+
 module.exports = router;

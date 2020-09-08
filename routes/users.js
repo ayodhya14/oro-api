@@ -1,6 +1,5 @@
 const express = require('express');
 const User = require('../models/user');
-const UserSession = require('../models/UserSession');
 const bcrypt = require("bcrypt");
 const router = express.Router();
 // const jwt = require("jsonwebtoken");
@@ -211,7 +210,5 @@ router.put('/:userId', async (req, res) => {
     }
     
 });
-
-
 
 module.exports = router;
