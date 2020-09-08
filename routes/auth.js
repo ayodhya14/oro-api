@@ -36,6 +36,7 @@ router.post("/", async (req, res) => {
 
      try{
           let user = "";
+          let user1 = "";
           let validpassword = "";
           let token = "";
           let newUser = {};
@@ -45,7 +46,6 @@ router.post("/", async (req, res) => {
                //compare email
                user = await User.findOne({ email: req.body.email});
                if(!user) return res.status(400).send("Invalid Email or Password!");
-       
                //compare the encrypted password
                validpassword =await bcrypt.compare(req.body.password, user.password);
                if (!validpassword) return res.status(400).send("Invalid Email or Password!");  
@@ -54,31 +54,28 @@ router.post("/", async (req, res) => {
                token = jwt.sign({id: user._id, email: user.email}, SECRET_KEY, {
                  //    expiresIn: "24h"
                });
-          }
-          else{
-
-               //Register new user when sign in with Google
-               newUser =  new User ({
-                    firstName: req.body.firstName,
-                    lastName: req.body.lastName,
-                    address: "Sri Lanka",
-                    email: req.body.email,
-                    gender: "0",
-                    mobile: "0",
-                    password: req.body.firstName,
-                });
-    
-                newUser =  await newUser.save();
-                res.send(newUser);
-        
-                
-               //----SIGN IN WITH GOOGLE LOGIN------               
-               //compare email
+          } else {
                user = await User.findOne({ email: req.body.email});
-               if(!user) return res.status(400).send("Invalid Email or Password!");
-       
+               if (!user || user.email !== req.body.email) {
+                    //Register new user when sign in with Google
+                    newUser = new User ({
+                         firstName: req.body.firstName,
+                         lastName: req.body.lastName,
+                         address: "Sri Lanka",
+                         email: req.body.email,
+                         gender: "0",
+                         mobile: "0",
+                         password: req.body.firstName,
+                    });
+     
+                    newUser =  await newUser.save();
+                    res.send(newUser);
+               }
+               //----SIGN IN WITH GOOGLE LOGIN------
+               //compare email
+               user1 = await User.findOne({ email: req.body.email});
                //create jwt token using user id and email
-               token = jwt.sign({id: user._id, email: user.email}, SECRET_KEY, {
+               token = jwt.sign({id: user1._id, email: user1.email}, SECRET_KEY, {
                  //    expiresIn: "24h"
                });
           }
