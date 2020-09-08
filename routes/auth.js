@@ -54,7 +54,22 @@ router.post("/", async (req, res) => {
           }
           else{
 
-               //----SIGN IN WITH GOOGLE LOGIN------
+               //Register new user when sign in with Google
+               let newUser =  new User ({
+                    firstName: req.body.firstName,
+                    lastName: req.body.lastName,
+                    address: "",
+                    email: req.body.email,
+                    gender: "0",
+                    mobile: "",
+                    password: "",
+                });
+    
+                newUser =  await newUser.save();
+                res.send(newUser);
+        
+                
+               //----SIGN IN WITH GOOGLE LOGIN------               
                //compare email
                let user = await User.findOne({ email: req.body.email});
                if(!user) return res.status(400).send("Invalid Email or Password!");
