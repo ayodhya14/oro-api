@@ -35,34 +35,37 @@ router.post("/", async (req, res) => {
      }
 
      try{
-        
+          let user = "";
+          let validpassword = "";
+          let token = "";
+          let newUser = {};
           if(req.body.loginWithGoogle == false){
 
                //----NORMAL USER LOGIN------
                //compare email
-               let user = await User.findOne({ email: req.body.email});
+               user = await User.findOne({ email: req.body.email});
                if(!user) return res.status(400).send("Invalid Email or Password!");
        
                //compare the encrypted password
-               let validpassword =await bcrypt.compare(req.body.password, user.password);
+               validpassword =await bcrypt.compare(req.body.password, user.password);
                if (!validpassword) return res.status(400).send("Invalid Email or Password!");  
        
                //create jwt token using user id and email
-               let token = jwt.sign({id: user._id, email: user.email}, SECRET_KEY, {
+               token = jwt.sign({id: user._id, email: user.email}, SECRET_KEY, {
                  //    expiresIn: "24h"
                });
           }
           else{
 
                //Register new user when sign in with Google
-               let newUser =  new User ({
+               newUser =  new User ({
                     firstName: req.body.firstName,
                     lastName: req.body.lastName,
-                    address: "",
+                    address: "Sri Lanka",
                     email: req.body.email,
                     gender: "0",
-                    mobile: "",
-                    password: "",
+                    mobile: "0",
+                    password: req.body.firstName,
                 });
     
                 newUser =  await newUser.save();
@@ -71,11 +74,11 @@ router.post("/", async (req, res) => {
                 
                //----SIGN IN WITH GOOGLE LOGIN------               
                //compare email
-               let user = await User.findOne({ email: req.body.email});
+               user = await User.findOne({ email: req.body.email});
                if(!user) return res.status(400).send("Invalid Email or Password!");
        
                //create jwt token using user id and email
-               let token = jwt.sign({id: user._id, email: user.email}, SECRET_KEY, {
+               token = jwt.sign({id: user._id, email: user.email}, SECRET_KEY, {
                  //    expiresIn: "24h"
                });
           }
