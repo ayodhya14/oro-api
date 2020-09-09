@@ -75,7 +75,7 @@ router.post("/", async (req, res) => {
     !req.body.availableQty &&
     !req.body.unitPrice
   ) {
-    return res.status(400).send("Not all mandotry values have been set!");
+    return res.status(404).send("Not all mandotry values have been set!");
   }
 
   try {

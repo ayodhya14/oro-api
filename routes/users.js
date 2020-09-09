@@ -47,27 +47,27 @@ router.post('/', async (req, res) => {
         !req.body.mobile && 
         !req.body.password
         ){
-         return res.status(400).send("Not all mandotry values have been set!");
+         return res.status(404).send("Not all mandotry values have been set!");
      }
 
      //validation for First name
      if(!req.body.firstName){
-         return res.status(400).send("First Name cannot be blank!");
+         return res.status(404).send("First Name cannot be blank!");
      }
 
      //validation for Last name
      if(!req.body.lastName){
-          return res.status(400).send("Last Name cannot be blank!");
+          return res.status(404).send("Last Name cannot be blank!");
       }
 
     //validation for Gender
      if(!req.body.gender){
-          return res.status(400).send("Gender cannot be blank!");
+          return res.status(404).send("Gender cannot be blank!");
       }  
       
      //validation for Mobile
      if(!req.body.mobile){
-          return res.status(400).send("Mobile cannot be blank!");
+          return res.status(404).send("Mobile cannot be blank!");
       } 
       else if(!req.body.mobile.includes("+94") && (!req.body.mobile.length !== 12)){
         return res.status(400).send("Invalid Mobile number!");
@@ -75,12 +75,12 @@ router.post('/', async (req, res) => {
     
      //validation for Address
      if(!req.body.address){
-          return res.status(400).send("Address cannot be blank!");
+          return res.status(404).send("Address cannot be blank!");
       } 
       
      //validation for Email
      if(!req.body.email){
-          return res.status(400).send("Email cannot be blank!");
+          return res.status(404).send("Email cannot be blank!");
      } 
      else if (!req.body.email.includes("@" && ".com")){
           return res.status(400).send("Invalid Email Address!");
@@ -88,19 +88,19 @@ router.post('/', async (req, res) => {
 
       //validation for Password
      if(!req.body.password){
-          return res.status(400).send("Password cannot be blank!");
+          return res.status(404).send("Password cannot be blank!");
      } 
      
     //Check if this user email already exisits
     let haveUserEmail = await User.findOne({email: req.body.email});
     if(haveUserEmail){
-        return res.status(400).send('This user already exists!');
+        return res.status(401).send('This user already exists!');
     } 
 
     //Check if this user mobile already exisits
     let haveUserMobile = await User.findOne({mobile: req.body.mobile});
     if(haveUserMobile){
-        return res.status(400).send('This Mobile Number have already used!');
+        return res.status(401).send('This Mobile Number have already used!');
     } 
 
     else{   

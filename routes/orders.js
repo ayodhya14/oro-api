@@ -25,7 +25,7 @@ router.post("/", async (req, res) => {
     res.status(400).send("Invalid Token!");
   }
 
-  //  Validation
+// Validations - All Feilds are empty
   if (
     !req.body.userId &&
     !req.body.products &&
@@ -35,7 +35,31 @@ router.post("/", async (req, res) => {
     !req.body.totQty &&
     !req.body.date
   ) {
-    return res.status(400).send("Not all mandotry values have been set!");
+    return res.status(404).send("Not all mandotry values have been set!");
+  }
+
+  //validation for user
+  if(!req.body.userId){
+    return res.status(404).send("Blank!");
+  }
+
+  //validation for products
+  if(!req.body.products){
+    return res.status(404).send("Blank!");
+  }
+
+  //validation for subtotal
+  if(!req.body.subTotal){
+    return res.status(404).send("Blank!");
+  }
+
+  //validation for totqty
+  if(!req.body.totQty){
+    return res.status(404).send("Blank!");
+  }
+  //validation for date
+  if(!req.body.date){
+     return res.status(404).send("Blank!");
   }
 
   try {

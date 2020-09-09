@@ -17,12 +17,12 @@ router.post("/", async (req, res) => {
 
           // Validations - All Feilds are empty
           if(!req.body.mobile && !req.body.password){
-               return res.status(400).send("Not all mandotry values have been set!");
+               return res.status(404).send("Not all mandotry values have been set!");
           }
      
           //validation for Email
           if(!req.body.email){
-               return res.status(400).send("Email cannot be blank!");
+               return res.status(404).send("Email cannot be blank!");
           } 
           else if (!req.body.email.includes("@" && ".com")){
                return res.status(400).send("Invalid Email Address!");
@@ -30,7 +30,7 @@ router.post("/", async (req, res) => {
      
           //validation for Password
           if(!req.body.password){
-               return res.status(400).send("Password cannot be blank!");
+               return res.status(404).send("Password cannot be blank!");
           } 
      }
 
