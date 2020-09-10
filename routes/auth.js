@@ -13,7 +13,7 @@ const SECRET_KEY = "Y4w8atbcZFRfsWdMNvBea5TeqrUHtWLaVQURv25T1bU=";
 router.post("/", async (req, res) => {
 
 
-     if(req.body.loginWithGoogle == false){
+     if(req.body.loginType == "Normal"){
 
           // Validations - All Feilds are empty
           if(!req.body.mobile && !req.body.password){
@@ -40,7 +40,8 @@ router.post("/", async (req, res) => {
           let validpassword = "";
           let token = "";
           let newUser = {};
-          if(req.body.loginWithGoogle == false){
+
+          if(req.body.loginType == "Normal"){
 
                //----NORMAL USER LOGIN------
                //compare email
@@ -54,9 +55,21 @@ router.post("/", async (req, res) => {
                token = jwt.sign({id: user._id, email: user.email}, SECRET_KEY, {
                  //    expiresIn: "24h"
                });
-          } else {
+
+
+                //----SIGN IN WITH GOOGLE LOGIN------
+          } else if (req.body.loginType == "Google") {
+              
+               //Validate the existing email or not
                user = await User.findOne({ email: req.body.email});
+
+               //Check user existing related to the email?  If existing user get the email and check with the email
                if (!user || user.email !== req.body.email) {
+
+                    //Password Encrypt using bcrypt
+                    let salt = await bcrypt.genSalt(10);
+                    let hashpassword = await bcrypt.hash(req.body.password,salt)
+
                     //Register new user when sign in with Google
                     newUser = new User ({
                          firstName: req.body.firstName,
@@ -65,20 +78,26 @@ router.post("/", async (req, res) => {
                          email: req.body.email,
                          gender: "0",
                          mobile: "0",
-                         password: req.body.firstName,
+                         password: hashpassword,
                     });
      
                     newUser =  await newUser.save();
                     res.send(newUser);
                }
-               //----SIGN IN WITH GOOGLE LOGIN------
+
                //compare email
                user1 = await User.findOne({ email: req.body.email});
                //create jwt token using user id and email
                token = jwt.sign({id: user1._id, email: user1.email}, SECRET_KEY, {
                  //    expiresIn: "24h"
                });
+         
+
+                //----SIGN IN WITH FACEBOOK LOGIN------
+          } else if (req.body.loginType == "Facebook"){
+
           }
+
        
           res.send({
               token: token,
