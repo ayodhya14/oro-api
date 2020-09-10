@@ -71,13 +71,40 @@ router.post("/", async (req, res) => {
   //Validation
   if (
     !req.body.name &&
-    !req.body.description &&
     !req.body.availableQty &&
-    !req.body.unitPrice
+    !req.body.unitPrice &&
+    !req.body.productType
   ) {
     return res.status(404).send("Not all mandotry values have been set!");
   }
 
+    //validation for Product Name
+    if(!req.body.name){
+      return res.status(404).send("Product Name cannot be blank!");
+    } 
+
+    //Check if this product name already exisits
+    let haveProductName = await User.findOne({name: req.body.name});
+    if(haveProductName){
+        return res.status(401).send('This Product have already in the database!');
+    } 
+
+    //validation for Available qty
+     if(!req.body.availableQty){
+          return res.status(404).send("Available quantity cannot be blank!");
+     } 
+
+     //validation for Unit Price
+     if(!req.body.unitPrice){
+      return res.status(404).send("Unit Price cannot be blank!");
+     } 
+
+      //validation for Type
+      if(!req.body.productType){
+        return res.status(404).send("Product Type cannot be blank!");
+      } 
+
+      
   try {
     let newProduct = new Product({
       name: req.body.name,

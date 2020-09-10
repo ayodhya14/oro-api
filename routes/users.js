@@ -130,61 +130,6 @@ router.post('/', async (req, res) => {
             return res.status(500).send(e.message);
         }
     }
-    
-    // app.post('/api/userLogin', (req, res) => {
-    //     const{ body} = req;
-    //     const{
-    //         password
-    //     } = body;
-    //     let {
-    //         email
-    //     } = body;
-
-    //      //validation for Email
-    //     if(!req.body.email){
-    //         return res.status(400).send("Email cannot be blank!");
-    //     } 
-    //     else if (!req.body.email.includes("@" && ".com")){
-    //         return res.status(400).send("Invalid Email Address!");
-    //     } 
-
-    //     //validation for Password
-    //     if(!req.body.password){
-    //         return res.status(400).send("Password cannot be blank!");
-    //     } 
-
-    //     email = email.toLowerCase();
-
-    //     user.find({
-    //         email: email
-    //     }, (err,users) => {
-    //         if(err) {
-    //             return res.status(400).send("Server error!");
-    //         }
-    //         if (users.length != 1){
-    //             return res.status(400).send("Invalid!");
-    //         }
-    //     })
-
-        // //If correct user
-        // const user = users[0];
-        // if(!user.validPassword(password)){
-        //     return res.status(400).send("Invalid Email or Password!");
-        // }
-
-        // new UserSession =  new UserSession();
-        // UserSession.userId = user._id;
-        // UserSession.save((err,doc) => {
-        //     if(err) {
-        //         return res.status(400).send("Server Error!");
-        //     }
-
-        //     return res.send({
-        //         return res.status(200).send("Valid sign in!"),
-        //         token: doc._id
-        //     });
-    //     // });
-    // });
 
 });
 
